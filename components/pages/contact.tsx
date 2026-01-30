@@ -13,6 +13,9 @@ export default function ContactPage() {
     message: '',
   })
 
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -20,22 +23,42 @@ export default function ContactPage() {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('[v0] Form submitted:', formData)
-    // Reset form
-    setFormData({ name: '', email: '', subject: '', message: '' })
-    // You can add actual form submission logic here
+    setIsSubmitting(true)
+    setSubmitStatus('idle')
+
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (response.ok) {
+        setSubmitStatus('success')
+        setFormData({ name: '', email: '', subject: '', message: '' })
+      } else {
+        setSubmitStatus('error')
+      }
+    } catch (error) {
+      console.error('[v0] Email send error:', error)
+      setSubmitStatus('error')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
-    <div className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: '#F5F5F5' }}>
+    <div className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'rgb(247, 151, 188)' }}>
       <div className="max-w-6xl mx-auto">
         <div className="mb-16">
-          <h1 className="text-4xl font-bold mb-4" style={{ color: '#880E4F' }}>
+          <h1 className="text-4xl font-bold mb-4" style={{ color: '#D81B60' }}>
             Get In Touch
           </h1>
-          <p className="text-lg" style={{ color: '#424242' }}>
+          <p className="text-lg" style={{ color: '#333333' }}>
             Have questions or want to collaborate? We'd love to hear from you.
             Contact us directly or fill out the form below.
           </p>
@@ -46,7 +69,7 @@ export default function ContactPage() {
           <div>
             <h2
               className="text-2xl font-bold mb-8"
-              style={{ color: '#880E4F' }}
+              style={{ color: '#D81B60' }}
             >
               Contact Information
             </h2>
@@ -62,7 +85,7 @@ export default function ContactPage() {
                 <div>
                   <h3
                     className="font-bold text-lg mb-2"
-                    style={{ color: '#880E4F' }}
+                    style={{ color: '#D81B60' }}
                   >
                     Address
                   </h3>
@@ -84,7 +107,7 @@ export default function ContactPage() {
                 <div>
                   <h3
                     className="font-bold text-lg mb-2"
-                    style={{ color: '#880E4F' }}
+                    style={{ color: '#D81B60' }}
                   >
                     Phone
                   </h3>
@@ -106,7 +129,7 @@ export default function ContactPage() {
                 <div>
                   <h3
                     className="font-bold text-lg mb-2"
-                    style={{ color: '#880E4F' }}
+                    style={{ color: '#D81B60' }}
                   >
                     Email
                   </h3>
@@ -126,7 +149,7 @@ export default function ContactPage() {
             >
               <h3
                 className="font-bold text-lg mb-3"
-                style={{ color: '#880E4F' }}
+                style={{ color: '#D81B60' }}
               >
                 Office Hours
               </h3>
@@ -156,7 +179,7 @@ export default function ContactPage() {
                   <label
                     htmlFor="name"
                     className="block text-sm font-medium mb-2"
-                    style={{ color: '#880E4F' }}
+                    style={{ color: '#D81B60' }}
                   >
                     Full Name
                   </label>
@@ -180,7 +203,7 @@ export default function ContactPage() {
                   <label
                     htmlFor="email"
                     className="block text-sm font-medium mb-2"
-                    style={{ color: '#880E4F' }}
+                    style={{ color: '#D81B60' }}
                   >
                     Email Address
                   </label>
@@ -204,7 +227,7 @@ export default function ContactPage() {
                   <label
                     htmlFor="subject"
                     className="block text-sm font-medium mb-2"
-                    style={{ color: '#880E4F' }}
+                    style={{ color: '#D81B60' }}
                   >
                     Subject
                   </label>
@@ -228,7 +251,7 @@ export default function ContactPage() {
                   <label
                     htmlFor="message"
                     className="block text-sm font-medium mb-2"
-                    style={{ color: '#880E4F' }}
+                    style={{ color: '#D81B60' }}
                   >
                     Message
                   </label>
@@ -250,12 +273,29 @@ export default function ContactPage() {
 
                 <button
                   type="submit"
-                  className="w-full py-3 text-white font-medium rounded-lg transition-opacity hover:opacity-90 flex items-center justify-center gap-2"
+                  disabled={isSubmitting}
+                  className="w-full py-3 text-white font-medium rounded-lg transition-opacity hover:opacity-90 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   style={{ backgroundColor: '#D81B60' }}
                 >
                   <Send size={18} />
-                  Send Message
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
                 </button>
+
+                {submitStatus === 'success' && (
+                  <div className="p-4 rounded-lg bg-green-50 border border-green-200">
+                    <p className="text-green-800 text-sm font-medium">
+                      Message sent successfully! We'll get back to you soon.
+                    </p>
+                  </div>
+                )}
+
+                {submitStatus === 'error' && (
+                  <div className="p-4 rounded-lg bg-red-50 border border-red-200">
+                    <p className="text-red-800 text-sm font-medium">
+                      Failed to send message. Please try again or contact us directly.
+                    </p>
+                  </div>
+                )}
               </div>
             </form>
           </div>

@@ -80,7 +80,7 @@ export default function TeamCarousel() {
   }
 
   return (
-    <div className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'rgb(253, 240, 245)' }}>
+    <div className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'rgb(247, 151, 188)' }}>
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-12">
           <div>
