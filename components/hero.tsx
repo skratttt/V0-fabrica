@@ -34,7 +34,7 @@ export default function Hero() {
       <div 
         className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t" 
         style={{
-          backgroundImage: 'linear-gradient(to top, rgb(253, 240, 245), transparent)'
+          backgroundImage: 'linear-gradient(to top, rgb(247, 151, 188), transparent)'
         }}
       />
     </section>

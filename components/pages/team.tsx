@@ -4,19 +4,19 @@ import TeamCarousel from '@/components/team-carousel'
 
 export default function TeamPage() {
   return (
-    <div style={{ backgroundColor: '#F5F5F5' }}>
+    <div style={{ backgroundColor: 'rgb(247, 151, 188)' }}>
       <TeamCarousel />
 
       {/* Team Values Section */}
-      <div className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: '#F5F5F5' }}>
+      <div className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'rgb(247, 151, 188)' }}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4" style={{ color: '#880E4F' }}>
+            <h2 className="text-3xl font-bold mb-4" style={{ color: '#D81B60' }}>
               What We Value
             </h2>
             <p
               className="text-lg max-w-3xl mx-auto"
-              style={{ color: '#424242' }}
+              style={{ color: '#333333' }}
             >
               Our team is united by a shared commitment to rigorous research,
               integrity, and the mission to improve quality of life through
@@ -34,7 +34,7 @@ export default function TeamPage() {
               </div>
               <h3
                 className="text-xl font-bold mb-3"
-                style={{ color: '#880E4F' }}
+                style={{ color: '#D81B60' }}
               >
                 Rigorous Research
               </h3>
@@ -53,7 +53,7 @@ export default function TeamPage() {
               </div>
               <h3
                 className="text-xl font-bold mb-3"
-                style={{ color: '#880E4F' }}
+                style={{ color: '#D81B60' }}
               >
                 Collaboration
               </h3>
@@ -72,7 +72,7 @@ export default function TeamPage() {
               </div>
               <h3
                 className="text-xl font-bold mb-3"
-                style={{ color: '#880E4F' }}
+                style={{ color: '#D81B60' }}
               >
                 Impact
               </h3>
@@ -88,7 +88,7 @@ export default function TeamPage() {
       {/* Join Our Team CTA */}
       <div
         className="py-16 px-4 sm:px-6 lg:px-8"
-        style={{ backgroundColor: '#880E4F' }}
+        style={{ backgroundColor: '#D81B60' }}
       >
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-4 text-white">Join Our Team</h2>

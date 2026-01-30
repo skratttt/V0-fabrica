@@ -4,14 +4,14 @@ import { Award, Target, Users } from 'lucide-react'
 
 export default function AboutPage() {
   return (
-    <div className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: '#F5F5F5' }}>
+    <div className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'rgb(247, 151, 188)' }}>
       <div className="max-w-4xl mx-auto">
         {/* Hero Section */}
         <div className="mb-16">
-          <h1 className="text-4xl font-bold mb-6" style={{ color: '#880E4F' }}>
+          <h1 className="text-4xl font-bold mb-6" style={{ color: '#D81B60' }}>
             About Fabrica Chile
           </h1>
-          <p className="text-xl mb-8 leading-relaxed" style={{ color: '#424242' }}>
+          <p className="text-xl mb-8 leading-relaxed" style={{ color: '#333333' }}>
             Fabrica Chile is a leading independent think tank dedicated to rigorous
             research, thoughtful analysis, and evidence-based policy recommendations
             on quality of life and decentralization in Chile.
@@ -26,7 +26,7 @@ export default function AboutPage() {
             </div>
             <h3
               className="text-2xl font-bold mb-4"
-              style={{ color: '#880E4F' }}
+              style={{ color: '#D81B60' }}
             >
               Our Mission
             </h3>
@@ -42,7 +42,7 @@ export default function AboutPage() {
             </div>
             <h3
               className="text-2xl font-bold mb-4"
-              style={{ color: '#880E4F' }}
+              style={{ color: '#D81B60' }}
             >
               Our Vision
             </h3>
@@ -58,7 +58,7 @@ export default function AboutPage() {
             </div>
             <h3
               className="text-2xl font-bold mb-4"
-              style={{ color: '#880E4F' }}
+              style={{ color: '#D81B60' }}
             >
               Our Values
             </h3>
@@ -76,7 +76,7 @@ export default function AboutPage() {
         >
           <h2
             className="text-3xl font-bold mb-6"
-            style={{ color: '#880E4F' }}
+            style={{ color: '#D81B60' }}
           >
             Our Story
           </h2>
@@ -104,7 +104,7 @@ export default function AboutPage() {
         <div>
           <h2
             className="text-3xl font-bold mb-8"
-            style={{ color: '#880E4F' }}
+            style={{ color: '#D81B60' }}
           >
             Focus Areas
           </h2>

@@ -21,16 +21,15 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const publicationSubItems = ['Media', 'Opinion', 'Research']
+  const publicationSubItems = ['Media', 'Opinion']
 
   const handleNavClick = (page: string) => {
     setCurrentPage(page.toLowerCase())
     setMobileMenuOpen(false)
-    setShowPublicationsMenu(false)
     window.scrollTo(0, 0)
   }
 
-  const isPublicationPage = ['media', 'opinion', 'research'].includes(currentPage)
+  const isPublicationPage = ['media', 'opinion'].includes(currentPage)
 
   return (
     <header
@@ -70,7 +69,7 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
 
             {/* Publications with Dropdown */}
             <div
-              className="relative"
+              className="relative group"
               onMouseEnter={() => setShowPublicationsMenu(true)}
               onMouseLeave={() => setShowPublicationsMenu(false)}
             >
@@ -90,26 +89,40 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
               </button>
 
               {/* Dropdown Menu */}
-              {showPublicationsMenu && (
-                <div
-                  className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-48 bg-white rounded-lg shadow-lg py-2"
-                  style={{ border: '1px solid #E0E0E0' }}
-                >
-                  {publicationSubItems.map((item) => (
-                    <button
-                      key={item}
-                      onClick={() => handleNavClick(item)}
-                      className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 transition-colors"
-                      style={{
-                        color: currentPage === item.toLowerCase() ? '#4DB6AC' : '#424242',
-                      }}
-                    >
-                      {item}
-                    </button>
-                  ))}
-                </div>
-              )}
+              <div
+                className="absolute top-full left-1/2 transform -translate-x-1/2 mt-0 w-48 bg-white rounded-lg shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50"
+                style={{ border: '1px solid #E0E0E0' }}
+              >
+                {publicationSubItems.map((item) => (
+                  <button
+                    key={item}
+                    onClick={() => handleNavClick(item)}
+                    className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 transition-colors"
+                    style={{
+                      color: currentPage === item.toLowerCase() ? '#4DB6AC' : '#424242',
+                    }}
+                  >
+                    {item}
+                  </button>
+                ))}
+              </div>
             </div>
+
+            {/* Servicios */}
+            <button
+              onClick={() => handleNavClick('servicios')}
+              className={`font-medium text-sm hover:opacity-80 transition-all duration-200 pb-1 ${
+                currentPage === 'servicios'
+                  ? 'border-b-2'
+                  : 'border-b-2 border-transparent'
+              }`}
+              style={{
+                color: currentPage === 'servicios' ? '#4DB6AC' : '#D81B60',
+                borderColor: currentPage === 'servicios' ? '#4DB6AC' : 'transparent',
+              }}
+            >
+              Servicios
+            </button>
 
             {/* Team */}
             <button
@@ -183,6 +196,16 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
                 </button>
               ))}
             </div>
+
+            <button
+              onClick={() => handleNavClick('servicios')}
+              style={{
+                color: currentPage === 'servicios' ? '#4DB6AC' : '#D81B60',
+              }}
+              className="block font-medium text-sm hover:opacity-80 w-full text-left"
+            >
+              Servicios
+            </button>
 
             <button
               onClick={() => handleNavClick('team')}

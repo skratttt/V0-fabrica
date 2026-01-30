@@ -43,13 +43,13 @@ export default function ResearchPage() {
   ]
 
   return (
-    <div className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: '#F5F5F5' }}>
+    <div className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'rgb(247, 151, 188)' }}>
       <div className="max-w-7xl mx-auto">
         <div className="mb-16">
-          <h1 className="text-4xl font-bold mb-4" style={{ color: '#880E4F' }}>
+          <h1 className="text-4xl font-bold mb-4" style={{ color: '#D81B60' }}>
             Research
           </h1>
-          <p className="text-lg max-w-3xl" style={{ color: '#424242' }}>
+          <p className="text-lg max-w-3xl" style={{ color: '#333333' }}>
             Our research team conducts rigorous, evidence-based studies on quality of
             life and decentralization. Explore our latest findings and reports.
           </p>
@@ -66,7 +66,7 @@ export default function ResearchPage() {
                 <div className="flex items-start gap-4 mb-4">
                   <div
                     className="p-3 rounded-lg"
-                    style={{ backgroundColor: '#880E4F' }}
+                    style={{ backgroundColor: '#D81B60' }}
                   >
                     <Icon size={24} className="text-white" />
                   </div>
@@ -90,7 +90,7 @@ export default function ResearchPage() {
                 </div>
                 <h3
                   className="text-xl font-bold mb-3"
-                  style={{ color: '#880E4F' }}
+                  style={{ color: '#D81B60' }}
                 >
                   {study.title}
                 </h3>

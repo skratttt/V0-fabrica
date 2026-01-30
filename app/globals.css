@@ -5,7 +5,7 @@
 
 :root {
   /* Fabrica Chile Pink-Centric Color Palette */
-  --background: rgb(253, 240, 245); /* Soft Pinkish Background */
+  --background: rgb(247, 151, 188); /* Vibrant Pink Background */
   --foreground: rgb(255, 255, 255); /* White text */
   --card: rgb(255, 255, 255); /* Pure White for cards */
   --card-foreground: rgb(66, 66, 66); /* Charcoal Gray for card text */
@@ -15,7 +15,7 @@
   --primary-foreground: #FFFFFF;
   --secondary: rgb(216, 27, 96); /* Vibrant Raspberry */
   --secondary-foreground: #FFFFFF;
-  --muted: rgb(253, 240, 245);
+  --muted: rgb(247, 151, 188);
   --muted-foreground: rgb(180, 100, 140);
   --accent: rgb(77, 182, 172); /* Mint Green */
   --accent-foreground: #FFFFFF;
@@ -124,6 +124,6 @@
   }
   body {
     @apply bg-background text-foreground;
-    background-color: rgb(253, 240, 245);
+    background-color: rgb(247, 151, 188);
   }
 }
