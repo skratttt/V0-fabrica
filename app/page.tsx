@@ -1,12 +1,12 @@
 'use client'
 
 import { useState } from 'react'
-import Header from '@/components/header'
+import Header from '@/components/header' // Aquí SÍ importamos el Header
 import Hero from '@/components/hero'
 import ContentGrid from '@/components/content-grid'
 import FeaturedColumnists from '@/components/featured-columnists'
 import MediaHub from '@/components/media-hub'
-import Footer from '@/components/footer'
+import Footer from '@/components/footer' // Y el Footer
 import OpinionPage from '@/components/pages/opinion'
 import MediaPage from '@/components/pages/media'
 import AboutPage from '@/components/pages/about'
@@ -14,9 +14,10 @@ import ContactPage from '@/components/pages/contact'
 import TeamPage from '@/components/pages/team'
 import ServiciosPage from '@/components/pages/servicios'
 import TokenExchangePage from '@/components/pages/token-exchange'
-import ResearchPage from '@/components/pages/research' // Declared the ResearchPage component
+import ResearchPage from '@/components/pages/research'
 
 export default function Home() {
+  // Esta es la "inteligencia" de los botones
   const [currentPage, setCurrentPage] = useState('home')
 
   const renderPage = () => {
@@ -49,8 +50,11 @@ export default function Home() {
 
   return (
     <main className="min-h-screen">
+      {/* Pasamos las funciones a los botones para que funcionen */}
       <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      
       {renderPage()}
+      
       <Footer />
     </main>
   )

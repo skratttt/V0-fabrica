@@ -1,142 +1,140 @@
 'use client'
 
-import { MessageSquare, Lightbulb } from 'lucide-react'
 import useSWR from 'swr'
-import { useState } from 'react'
+import Link from 'next/link'
+import { createClient } from "next-sanity"
+import imageUrlBuilder from "@sanity/image-url"
+import { Calendar, User } from 'lucide-react'
 
+// 1. CONFIGURACIÓN PARA IMÁGENES (Igual que hiciste en la noticia)
+const client = createClient({
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
+  apiVersion: "2024-01-01",
+  useCdn: false,
+});
+
+const builder = imageUrlBuilder(client);
+function urlFor(source: any) {
+  return source ? builder.image(source).width(400).height(250).url() : null;
+}
+
+// 2. INTERFAZ ACTUALIZADA (Ahora pedimos la imagen)
 interface Opinion {
   _id: string
   title: string
   slug: { current: string }
-  author?: { name: string; title?: string; avatar?: string }
-  authorName?: string
   publishedAt: string
-  readTime?: number
   excerpt?: string
-  category?: string
+  mainImage?: any // Importante para la foto de portada
+  author?: { name: string }
 }
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
 export default function OpinionPage() {
-  const { data, isLoading, error } = useSWR<{ data: Opinion[] }>('/api/sanity/opinions', fetcher)
-  const [selectedOpinion, setSelectedOpinion] = useState<string | null>(null)
-  const articles = data?.data || [];
-
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString)
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    })
-  }
+  const { data, isLoading } = useSWR<{ data: Opinion[] }>('/api/sanity/opinions', fetcher)
+  const articles = data?.data || []
 
   return (
-    <div className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'rgb(247, 151, 188)' }}>
-      <div className="max-w-4xl mx-auto">
-        <div className="mb-16">
-          <h1 className="text-4xl font-bold mb-4" style={{ color: '#D81B60' }}>
+    <div className="min-h-screen py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: '#F797BC' }}> {/* Tu Fondo Rosa */}
+      
+      <div className="max-w-7xl mx-auto">
+        {/* Encabezado */}
+        <div className="mb-12 text-center">
+          <h1 className="text-4xl font-serif font-bold mb-4 text-[#D81B60]">
             Opinion
           </h1>
-          <p className="text-lg" style={{ color: '#333333' }}>
-            Thought-provoking insights and expert analysis from our team on the most
-            pressing issues facing Chile today.
+          <p className="text-xl text-white font-medium max-w-2xl mx-auto">
+            Perspectivas de expertos sobre los desafíos y oportunidades más importantes de Chile.
           </p>
         </div>
 
+        {/* ESTADO DE CARGA (Skeletons en Grid) */}
         {isLoading && (
-          <div className="space-y-8">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="bg-white rounded-lg p-8 shadow-md animate-pulse">
-                <div className="h-4 bg-gray-200 rounded mb-3 w-1/4" />
-                <div className="h-6 bg-gray-200 rounded mb-3 w-3/4" />
-                <div className="h-16 bg-gray-200 rounded mb-6" />
-                <div className="h-10 bg-gray-200 rounded w-32" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div key={i} className="bg-white rounded-xl overflow-hidden shadow-lg animate-pulse h-96">
+                <div className="h-48 bg-gray-200 w-full" />
+                <div className="p-6 space-y-4">
+                  <div className="h-6 bg-gray-200 rounded w-3/4" />
+                  <div className="h-4 bg-gray-200 rounded w-full" />
+                  <div className="h-4 bg-gray-200 rounded w-1/2" />
+                </div>
               </div>
             ))}
           </div>
         )}
 
-        {error && (
-          <div className="text-center py-12 bg-white rounded-lg">
-            <p className="text-gray-600">Unable to load opinions. Please try again later.</p>
-          </div>
-        )}
-
-        {!isLoading && !error && data?.data && data.data.length === 0 && (
-          <div className="text-center py-12 bg-white rounded-lg">
-            <MessageSquare size={48} className="mx-auto mb-4 opacity-50" style={{ color: '#D81B60' }} />
-            <p className="text-gray-600">No opinion articles available yet. Check back soon!</p>
-          </div>
-        )}
-
-        {!isLoading && !error && data?.data && data.data.length > 0 && (
-          <div className="space-y-8">
-            {data.data.map((article) => (
-              <article
-                key={article._id}
-                className="bg-white rounded-lg p-8 shadow-md hover:shadow-lg transition-shadow border-l-4"
-                style={{ borderColor: '#4DB6AC' }}
+        {/* GRID DE TARJETAS (Estilo Foto 2) */}
+        {!isLoading && articles.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {articles.map((article) => (
+              <Link 
+                key={article._id} 
+                href={`/opinion/${article.slug.current}`}
+                className="group"
               >
-                <div className="flex gap-4 mb-4">
-                  <MessageSquare size={20} style={{ color: '#D81B60' }} />
-                  <div>
-                    <p
-                      className="text-sm font-semibold"
-                      style={{ color: '#D81B60' }}
-                    >
-                      By {article.author?.name || article.authorName || 'Fabrica Chile'}
-                    </p>
-                    <p
-                      className="text-xs"
-                      style={{ color: '#9E9E9E' }}
-                    >
-                      {formatDate(article.publishedAt)} • {article.readTime || 5} min read
-                    </p>
+                <article className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 h-full flex flex-col border border-white/20">
+                  
+                  {/* FOTO ARRIBA (Si no hay, pone un gris) */}
+                  <div className="h-48 w-full bg-gray-100 relative overflow-hidden">
+                    {article.mainImage ? (
+                      <img 
+                        src={urlFor(article.mainImage)} 
+                        alt={article.title}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-gray-400">
+                        <span>Sin imagen</span>
+                      </div>
+                    )}
                   </div>
-                </div>
-                <h2
-                  className="text-2xl font-bold mb-3"
-                  style={{ color: '#D81B60' }}
-                >
-                  {article.title}
-                </h2>
-                <p className="mb-6 text-lg" style={{ color: '#424242' }}>
-                  {article.excerpt || 'Read this insightful opinion piece...'}
-                </p>
-                <button
-                  onClick={() => setSelectedOpinion(article.slug.current)}
-                  className="text-white font-medium px-6 py-2 rounded-lg transition-opacity hover:opacity-90"
-                  style={{ backgroundColor: '#D81B60' }}
-                >
-                  Read Opinion
-                </button>
-              </article>
+
+                  {/* CONTENIDO */}
+                  <div className="p-6 flex flex-col flex-grow">
+                    {/* Título */}
+                    <h2 className="text-xl font-bold mb-3 text-gray-900 group-hover:text-[#D81B60] transition-colors line-clamp-2">
+                      {article.title}
+                    </h2>
+
+                    {/* Resumen (Excerpt) */}
+                    <p className="text-gray-600 text-sm mb-6 line-clamp-3 flex-grow">
+                      {article.excerpt || 'Lee el análisis completo de nuestros expertos haciendo clic aquí...'}
+                    </p>
+
+                    {/* Pie de tarjeta (Autor y Fecha) */}
+                    <div className="flex items-center justify-between pt-4 border-t border-gray-100 mt-auto">
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-full bg-[#FCE4EC] flex items-center justify-center text-[#D81B60]">
+                          <User size={16} />
+                        </div>
+                        <span className="text-xs font-bold text-gray-700">
+                          {article.author?.name || 'Fabrica Chile'}
+                        </span>
+                      </div>
+                      
+                      {article.publishedAt && (
+                        <span className="text-xs text-gray-400 font-medium">
+                          {new Date(article.publishedAt).toLocaleDateString('es-CL')}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </article>
+              </Link>
             ))}
           </div>
         )}
 
-        {/* Opinion Newsletter CTA */}
-        <div
-          className="mt-16 p-8 rounded-lg text-center"
-          style={{ backgroundColor: '#D81B60' }}
-        >
-          <Lightbulb size={40} className="mx-auto mb-4 text-white" />
-          <h3 className="text-2xl font-bold mb-4 text-white">
-            Get Expert Opinions
-          </h3>
-          <p className="mb-6 text-white opacity-90">
-            Subscribe to our newsletter for the latest insights and analysis from
-            our experts.
-          </p>
-          <button
-            className="px-8 py-3 text-white font-medium rounded-lg transition-opacity hover:opacity-90"
-            style={{ backgroundColor: '#D81B60' }}
-          >
-            Subscribe Now
-          </button>
-        </div>
+        {/* Mensaje si no hay noticias */}
+        {!isLoading && articles.length === 0 && (
+          <div className="text-center py-20 bg-white/10 rounded-3xl backdrop-blur-sm">
+            <p className="text-white text-xl">No hay artículos publicados aún.</p>
+          </div>
+        )}
+
       </div>
     </div>
   )

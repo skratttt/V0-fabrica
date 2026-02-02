@@ -1,37 +1,16 @@
 import React from "react"
 import type { Metadata } from 'next'
-
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
-import { Geist, Geist_Mono, Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Lora as V0_Font_Lora } from 'next/font/google'
+import { Geist, Geist_Mono, Lora } from 'next/font/google'
 
-// Initialize fonts
-const _geist = V0_Font_Geist({ subsets: ['latin'], weight: ["100","200","300","400","500","600","700","800","900"] })
-const _geistMono = V0_Font_Geist_Mono({ subsets: ['latin'], weight: ["100","200","300","400","500","600","700","800","900"] })
-const _lora = V0_Font_Lora({ subsets: ['latin'], weight: ["400","500","600","700"] })
+const geist = Geist({ subsets: ['latin'] })
+const lora = Lora({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Fabrica Chile - Think Tank for Quality of Life & Decentralization',
-  description:
-    'Fabrica Chile is a leading think tank dedicated to rigorous research and thoughtful analysis on quality of life and decentralization. Explore our studies, surveys, and expert opinions.',
-  generator: 'v0.app',
-  icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
-  },
+  title: 'Fabrica Chile',
+  description: 'Think Tank for Quality of Life & Decentralization',
+  icons: { icon: '/icon.svg' },
 }
 
 export default function RootLayout({
@@ -41,7 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`font-serif antialiased`}>
+      <body className={`${geist.className} ${lora.className} antialiased`}>
+        {/* IMPORTANTE: Aquí NO ponemos Header ni Footer. 
+            Dejamos que cada página decida. */}
         {children}
         <Analytics />
       </body>

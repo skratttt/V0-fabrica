@@ -1,29 +1,30 @@
-import { NextResponse } from 'next/server'
-import { sanityClient } from '@/lib/sanity'
+import { createClient } from "next-sanity";
+import { NextResponse } from "next/server";
+
+const client = createClient({
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
+  apiVersion: "2024-01-01",
+  useCdn: false,
+});
 
 export async function GET() {
-  try {
-    const opinions = await sanityClient.fetch(
-      `*[_type == "opinion"] | order(publishedAt desc) {
-        _id,
-        title,
-        slug,
-        "author": author->{name, title, avatar},
-        authorName,
-        publishedAt,
-        readTime,
-        excerpt,
-        category,
-        featured
-      }`
-    )
+  // Aquí agregamos 'mainImage' para que viajen las fotos
+  const query = `*[_type == "opinion"] | order(publishedAt desc) {
+    _id,
+    title,
+    slug,
+    publishedAt,
+    excerpt,
+    mainImage,
+    author->{name}
+  }`;
 
-    return NextResponse.json({ data: opinions })
+  try {
+    const data = await client.fetch(query);
+    return NextResponse.json({ data });
   } catch (error) {
-    console.error('Failed to fetch opinions:', error)
-    return NextResponse.json(
-      { error: 'Failed to fetch opinions' },
-      { status: 500 }
-    )
+    console.error("Error fetching opinions:", error);
+    return NextResponse.json({ error: "Error fetching data" }, { status: 500 });
   }
 }
