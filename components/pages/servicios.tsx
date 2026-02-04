@@ -14,58 +14,58 @@ import {
 const services = [
   {
     id: 1,
-    title: 'Policy Research & Analysis',
+    title: 'Charlas Estratégicas',
     description:
-      'In-depth research and analysis on public policy issues affecting quality of life and decentralization in Chile.',
+      'Realizamos charlas estratégicas, sobre ciclos, contingencias y coyunturas sociopolíticas, dirigidas a directorios, concejos, asambleas y otros espacios organizativos del mundo privado, empresarial, diplomático y de la sociedad civil en general, tanto a nivel nacional, como internacional. ',
     icon: FileText,
   },
   {
     id: 2,
-    title: 'Economic Impact Studies',
+    title: 'Pensando Chile',
     description:
-      'Comprehensive economic impact assessments for regional development projects and policy initiatives.',
+      'Generamos reflexiones sobre el desarrollo del país y el futuro de la sociedad democrática, articulando a los principales actores y a las más reconocidas voces de la política nacional.',
     icon: TrendingUp,
   },
   {
     id: 3,
-    title: 'Stakeholder Engagement',
+    title: 'Inteligencia Legislativa',
     description:
-      'Facilitation of dialogue and collaboration between government, private sector, and civil society organizations.',
+      'Radar parlamentario siempre encendido. Elaboramos minutas e informes estratégicos de seguimiento, impacto y articulación de proyectos de ley, así como prospección de votaciones, stakeholders y movimientos clave en el Congreso',
     icon: Users,
   },
   {
     id: 4,
-    title: 'Data Analysis & Surveys',
+    title: 'Estudios',
     description:
-      'Quantitative and qualitative research methodologies to gather insights on public opinion and social trends.',
+      'Desarrollamos reportes, informes y estudios sobre distintas temáticas de interés público, que sirvan como insumo estratégico para el proceso de toma de decisiones en instituciones públicas y privadas',
     icon: BarChart3,
   },
   {
     id: 5,
-    title: 'Strategic Communication',
+    title: 'Informes de comunicación digital y estratégica',
     description:
-      'Development of communication strategies to effectively disseminate research findings and policy recommendations.',
+      'Analizamos la performance comunicacional de actores en el entorno digital y en el entorno mediático, proveyendo recomendaciones e insumos para la toma de decisiones, el manejo de riesgos y la gestión de crisis, derivados del actuar comunicativo de vocerías públicas y privadas.',
     icon: MessageSquare,
   },
   {
     id: 6,
-    title: 'Consulting Services',
+    title: 'Informes de reputación y opinión pública digital',
     description:
-      'Expert advisory services for organizations seeking guidance on policy design, implementation, and evaluation.',
+      'Escuchamos, monitoreamos, damos seguimiento y analizamos temáticas críticas, marcas y tendencias que circulan en la conversación pública digital, evaluando las dinámicas que caracterizan dicha conversación, su circulación, sus lógicas, impactos, audiencias y comunidades.      ',
     icon: Briefcase,
   },
   {
     id: 7,
-    title: 'Training & Capacity Building',
+    title: 'Informes de estudio',
     description:
-      'Educational programs and workshops to strengthen institutional capacity in public policy and governance.',
+      'Diseñamos, aplicamos y/o analizamos encuestas para medir el clima social, la opinión pública, la opinión publicada y las más variadas aristas de los entornos sociopolíticos, económicos y culturales del país. ',
     icon: BookOpen,
   },
   {
     id: 8,
-    title: 'Advocacy & Coalition Building',
+    title: 'Análisis de Proyección Electoral',
     description:
-      'Strategic support for advocacy campaigns and coalition formation around key policy priorities.',
+      'Diseñamos, analizamos y proyectamos resultados electorales. Con sustento teórico y rigor metodológico, prospectamos el comportamiento electoral a nivel nacional, regional y comunal, con técnicas e insumos georreferenciados.',
     icon: Target,
   },
 ]
@@ -86,9 +86,8 @@ export default function ServiciosPage() {
             className="text-xl max-w-3xl mx-auto leading-relaxed"
             style={{ color: '#333333' }}
           >
-            Fabrica Chile offers a comprehensive range of services to support
-            evidence-based policy development and promote quality of life across
-            Chilean regions.
+            Fabrica Chile ofrece una gama integral de servicios para apoyar el desarrollo de políticas basadas en evidencia y promover la calidad de vida en las regiones chilenas.
+
           </p>
         </div>
 
@@ -129,17 +128,16 @@ export default function ServiciosPage() {
         {/* Call to Action */}
         <div className="mt-16 text-center bg-white rounded-lg p-8 sm:p-12 shadow-md">
           <h2 className="text-3xl font-bold mb-4" style={{ color: '#D81B60' }}>
-            Ready to Work Together?
+            Listo para comenzar y trabajar juntos?
           </h2>
           <p className="text-lg mb-8 max-w-2xl mx-auto" style={{ color: '#333333' }}>
-            Contact us to learn more about how our services can support your
-            organization's goals and initiatives.
+            Contactanos para discutir cómo podemos apoyar tus objetivos con nuestros servicios personalizados.
           </p>
           <button
             className="px-8 py-3 text-white font-semibold rounded-lg transition-all hover:shadow-lg hover:scale-105"
             style={{ backgroundColor: '#D81B60' }}
           >
-            Get in Touch
+            Contactanos
           </button>
         </div>
       </div>
