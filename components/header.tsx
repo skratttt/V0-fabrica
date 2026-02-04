@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Menu, X, ChevronDown } from 'lucide-react'
+import Image from 'next/image'
 
 interface HeaderProps {
   currentPage: string
@@ -44,9 +45,14 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
             onClick={() => handleNavClick('home')}
             className="flex-shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
           >
-            <h1 className="text-2xl font-bold" style={{ color: '#D81B60' }}>
-              Fabrica <span className="text-gray-700">Chile</span>
-            </h1>
+            <Image
+              src="/logo.png"
+              alt="FabricaChile"
+              width={200}
+              height={50}
+              className="h-10 w-auto"
+              priority
+            />
           </button>
 
           {/* Desktop Navigation - Centered */}

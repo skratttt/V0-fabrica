@@ -1,6 +1,7 @@
 'use client'
 
 import { MapPin, Phone, Facebook, Twitter, Linkedin, Github, Mail } from 'lucide-react'
+import Image from 'next/image'
 
 export default function Footer() {
 
@@ -13,9 +14,15 @@ export default function Footer() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 mb-12">
             {/* Brand */}
             <div>
-              <h3 className="text-xl font-bold text-white mb-4">
-                Fabrica <span style={{ color: '#4DB6AC' }}>Chile</span>
-              </h3>
+              <div className="mb-4">
+                <Image
+                  src="/logo.png"
+                  alt="FabricaChile"
+                  width={200}
+                  height={50}
+                  className="h-10 w-auto brightness-0 invert"
+                />
+              </div>
               <p className="text-gray-300 text-sm leading-relaxed">
                 A leading think tank dedicated to rigorous research and thoughtful analysis on Chile's most pressing challenges.
               </p>
