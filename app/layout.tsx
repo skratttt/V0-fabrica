@@ -10,7 +10,7 @@ const lora = Lora({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Fabrica Chile',
   description: 'Think Tank for Quality of Life & Decentralization',
-  icons: { icon: '/icon.svg' },
+  icons: { icon: '/logo.png' },
 }
 
 export default function RootLayout({
