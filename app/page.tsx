@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import Header from '@/components/header' // Aquí SÍ importamos el Header
 import Hero from '@/components/hero'
+import ProblemSection from '@/components/problem-section'
+import PillarsSection from '@/components/pillars-section'
 import ContentGrid from '@/components/content-grid'
 import FeaturedColumnists from '@/components/featured-columnists'
 import MediaHub from '@/components/media-hub'
@@ -40,6 +42,8 @@ export default function Home() {
         return (
           <>
             <Hero />
+            <ProblemSection />
+            <PillarsSection />
             <ContentGrid />
             <FeaturedColumnists />
             <MediaHub />
